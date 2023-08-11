@@ -1,0 +1,45 @@
+﻿@model Xpense_Tracker.Data.Category
+
+@{
+    ViewData["PageTitle"] = Model.CategoryID == 0 ? "Create a new Category" : "Edit a Category";
+   
+}
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="widget p-4" >
+        <form asp-action="AddorEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" value="@Model.CategoryID" name="CategoryID">
+            <div class='e-btn-group custom-rbt-group mb-4'>
+                <input type="radio" id="radioleft" name="Type" value="Expense"  checked="(@Model.Type== "Expense")"/>
+                <label class="e-btn" for="radioleft"> Expense </label>
+                <input type="radio" id="radiomiddle" name="Type" value="Income" checked="(@Model.Type== "Income")" />
+                <label class="e-btn" for="radiomiddle"> Income </label>
+            </div>
+            <div class=mb-4>
+                <ejs-textbox id="title" placeholder="Title" value="@Model.Title" floatLabelType="Always"></ejs-textbox>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="col mb-4">
+                <ejs-textbox id="icon" placeholder="Icon" value="@Model.Icon" floatLabelType="Always"></ejs-textbox>
+                <span asp-validation-for="Icon" class="text-danger"></span>
+            </div>
+  
+            <div class="col mb-4">
+                <ejs-button id="submit"  cssClass="e-success" content="Submit"></ejs-button>
+            </div>
+        </form>
+        </div>
+    </div>
+    <div class="col-md-5">
+         <div class="widget h-100 d-flex justify-content-center align-items-center" style="background-color:#212b36">
+            <i class="fa-solid fa-wallet fa-bounce fa-2xl"></i>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
